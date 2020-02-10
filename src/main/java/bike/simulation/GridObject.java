@@ -3,13 +3,11 @@ package bike.simulation;
 public interface GridObject {
     void reportGPS();
 
-    void moveForward();
+    void moveForwardOneSpace();
 
     void turnLeft();
 
     void turnRight();
 
-    void place(Point newPosition, Direction newDirection);
-
-    void determinePositionToSet(Direction direction);
+    void placeInGrid(Point newPosition, Direction newDirection);
 }

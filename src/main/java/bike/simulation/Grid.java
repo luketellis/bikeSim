@@ -1,10 +1,10 @@
 package bike.simulation;
 
 public class Grid {
-    static final int MAXIMUM_X = 6;
-    static final int MAXIMUM_Y = 6;
+    private static final int MAXIMUM_X = 6;
+    private static final int MAXIMUM_Y = 6;
 
-    public boolean isOutsideOfXBoundary(int x)
+    protected static boolean isOutsideOfXBoundary(int x)
     {
         if (x < 0 ||x > MAXIMUM_X)
         {
@@ -13,7 +13,7 @@ public class Grid {
         return false;
     }
 
-    public boolean isOutsideOfYBoundary(int y)
+    protected static boolean isOutsideOfYBoundary(int y)
     {
         if (y < 0 ||y > MAXIMUM_Y)
         {
@@ -22,12 +22,12 @@ public class Grid {
         return false;
     }
 
-    public boolean isOutsideOfBoundary(Point point)
+    protected static boolean isOutsideOfBoundary(Point point)
     {
         return isOutsideOfXBoundary(point.getX()) || isOutsideOfYBoundary(point.getY());
     }
 
-    public void drawGrid()
+    protected static void drawGrid()
     {
         int j;
         for (int i = 6; i > -1; i--)

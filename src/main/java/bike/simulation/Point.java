@@ -56,9 +56,9 @@ public class Point {
         this.y--;
     }
 
-    public Boolean validatePoint()
+    public Boolean isValidPoint()
     {
-        if (x > 7 || y > 7 || x < 0 || y < 0)
+        if (Grid.isOutsideOfBoundary(new Point(this.x, this.y)))
             return false;
 
         return true;

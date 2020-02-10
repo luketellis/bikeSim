@@ -1,12 +1,21 @@
 package bike.simulation;
 
 import java.util.logging.Logger;
+import static bike.simulation.Grid.*;
 
 public class Bike implements GridObject {
     private static final Logger LOGGER = Logger.getLogger(Bike.class.getName());
 
     private Direction directionFacing;
     private Point position;
+
+    public Bike() {
+    }
+
+    public Bike(Point position, Direction directionFacing) {
+        this.position = position;
+        this.directionFacing = directionFacing;
+    }
 
     public Direction getDirectionFacing() {
         return directionFacing;
@@ -16,20 +25,20 @@ public class Bike implements GridObject {
         return position;
     }
 
-    public void setDirectionFacing(Direction directionFacing) {
+    private void setDirectionFacing(Direction directionFacing) {
         this.directionFacing = directionFacing;
     }
 
-    public void setPosition(Point position) {
+    private void setPosition(Point position) {
         this.position = position;
     }
 
-    public Boolean isPositionSet()
+    private Boolean isPositionSet()
     {
         return position != null;
     }
 
-    public String getGPS()
+    private String getGPS()
     {
         return "(" + position.getX() + "," +
                 " " + position.getY() + ")," +
@@ -51,13 +60,11 @@ public class Bike implements GridObject {
             LOGGER.info(getGPS());
         } else {
             LOGGER.severe("The Bike must be placed before Reporting GPS");
-            return;
         }
-
     }
 
 
-    public void moveForward()
+    public void moveForwardOneSpace()
     {
         if (!hasBeenPlaced())
             return;
@@ -82,22 +89,22 @@ public class Bike implements GridObject {
                 moveBikeIfValid(newPoint);
                 break;
             default:
-                LOGGER.severe("The Current Direction the Bike is Facing is Invalid");
+                LOGGER.severe("The current direction the bike is facing is invalid");
                 break;
         }
     }
 
     private void moveBikeIfValid(Point newPoint){
-        if (!newPoint.validatePoint()) {
-            LOGGER.severe("Cannot Move Forward as Bike will leave the Grid");
-        } else {
+        if (newPoint.isValidPoint()) {
             setPosition(newPoint);
+        } else {
+            LOGGER.severe("Cannot move forward as bike is at the edge of the grid");
         }
     }
 
     public void turnLeft()
     {
-        if (hasBeenPlaced())
+        if (!hasBeenPlaced())
             return;
 
         switch (getDirectionFacing()) {
@@ -145,27 +152,15 @@ public class Bike implements GridObject {
     }
 
 
-    public void place(Point newPosition, Direction newDirection)
+    public void placeInGrid(Point newPosition, Direction newDirection)
     {
+        if (isOutsideOfBoundary(newPosition)) {
+            LOGGER.warning("Position is outside the boundary of the grid");
+            return;
+        }
+
         setPosition(newPosition);
         setDirectionFacing(newDirection);
     }
-
-
-    public void determinePositionToSet(Direction direction)
-    {
-        switch (direction) {
-            case NORTH:
-            case EAST :
-            case SOUTH:
-            case WEST :
-                setDirectionFacing(direction);
-                break;
-            default:
-                LOGGER.severe("Invalid Direction.");
-                break;
-        }
-    }
-
 
 }

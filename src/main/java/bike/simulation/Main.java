@@ -47,7 +47,8 @@ public class Main {
             try {
                 if (!((currentLine = br.readLine()) != null && !currentLine.equals("/q"))) break;
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.severe("IOException encountered\n" + e);
+                System.exit(1);
             }
 
             LOGGER.info(currentLine);
@@ -63,7 +64,7 @@ public class Main {
 
         switch (command) {
             case FORWARD :
-                bike.moveForward();
+                bike.moveForwardOneSpace();
                 break;
             case TURN_LEFT :
                 bike.turnLeft();
@@ -84,14 +85,15 @@ public class Main {
 
     private static void checkForPlaceKeyword(String line) {
         try {
-            String[] splitInTwo = line.split(" ");
+            String[] splitInTwo;
+            splitInTwo = line.split(" ");
 
             String[] splitInThree = splitInTwo[1].split(",");
 
             if (splitInTwo[0].equals("PLACE") && splitInThree.length == 3
                     && splitInThree[2].matches("NORTH|SOUTH|EAST|WEST")) {
                 Point startingPoint = new Point(Integer.parseInt(splitInThree[0]), Integer.parseInt(splitInThree[1]));
-                bike.place(startingPoint, Direction.valueOf(splitInThree[2]));
+                bike.placeInGrid(startingPoint, Direction.valueOf(splitInThree[2]));
             } else {
                 LOGGER.warning("Invalid Instruction - Skipping");
             }
