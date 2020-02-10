@@ -18,11 +18,11 @@ public class Main {
            LOGGER.severe("File Not Found, Exiting");
            System.exit(0);
         }
-
     }
 
     private static void checkArguments(String[] args) throws FileNotFoundException {
         int arguments = args.length;
+
         if(arguments == 0)
         {
             br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,13 +34,12 @@ public class Main {
         }
         else
         {
-            br = new BufferedReader(new FileReader(args[0]));
+            br = new BufferedReader(new FileReader("File" + File.separator + args[0]));
         }
     }
 
     private static void readInput() {
         String currentLine = "";
-
 
         while (true) {
             LOGGER.info("Ready to Receive Input: ");
@@ -56,28 +55,27 @@ public class Main {
         }
     }
 
-    private static void determineInstruction(String instruction)
-    {
+    private static void determineInstruction(String instruction) {
         //1. PLACE <X>,<Y>,<Facing-direction>
         try {
-        Command command = Command.valueOf(instruction);
+            Command command = Command.valueOf(instruction);
 
-        switch (command) {
-            case FORWARD :
-                bike.moveForwardOneSpace();
-                break;
-            case TURN_LEFT :
-                bike.turnLeft();
-                break;
-            case TURN_RIGHT :
-                bike.turnRight();
-                break;
-            case GPS_REPORT :
-                bike.reportGPS();
-                break;
-            default:
-                break;
-        }
+            switch (command) {
+                case FORWARD:
+                    bike.moveForwardOneSpace();
+                    break;
+                case TURN_LEFT:
+                    bike.turnLeft();
+                    break;
+                case TURN_RIGHT:
+                    bike.turnRight();
+                    break;
+                case GPS_REPORT:
+                    bike.reportGPS();
+                    break;
+                default:
+                    break;
+            }
         } catch (IllegalArgumentException e) {
             checkForPlaceKeyword(instruction);
         }

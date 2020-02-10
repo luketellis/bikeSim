@@ -16,35 +16,36 @@ public class TurnLeftTests {
 
         bike.turnLeft();
         checkBikePositionAndDirection(bike.getPosition(), bike.getDirectionFacing());
-
     }
 
     @Test
     public void turnLeft_bikeHasNorthPosition_bikeShouldFaceWest()  {
         bike = new Bike(new Point(0,0), NORTH);
+
         bike.turnLeft();
         checkBikePositionAndDirection(new Point(0,0), WEST);
-
     }
 
     @Test
     public void turnLeft_bikeHasSouthPosition_bikeShouldFaceEast()  {
         bike = new Bike(new Point(0,0), SOUTH);
+
         bike.turnLeft();
         checkBikePositionAndDirection(new Point(0,0), EAST);
-
     }
 
     @Test
     public void turnLeft_bikeHaEastPosition_bikeShouldFaceNorth()  {
         bike = new Bike(new Point(0,0), EAST);
+
         bike.turnLeft();
         checkBikePositionAndDirection(new Point(0,0), NORTH);
     }
 
     @Test
-    public void turnLeft_bikeHasEastPosition_bikeShouldFaceSouth()  {
+    public void turnLeft_bikeHasWestPosition_bikeShouldFaceSouth()  {
         bike = new Bike(new Point(0,0), WEST);
+
         bike.turnLeft();
         checkBikePositionAndDirection(new Point(0,0), SOUTH);
     }

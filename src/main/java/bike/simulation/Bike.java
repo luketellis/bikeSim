@@ -107,23 +107,8 @@ public class Bike implements GridObject {
         if (!hasBeenPlaced())
             return;
 
-        switch (getDirectionFacing()) {
-            case NORTH:
-                setDirectionFacing(Direction.WEST);
-                break;
-            case WEST:
-                setDirectionFacing(Direction.SOUTH);
-                break;
-            case SOUTH:
-                setDirectionFacing(Direction.EAST);
-                break;
-            case EAST:
-                setDirectionFacing(Direction.NORTH);
-                break;
-            default:
-                LOGGER.severe("Invalid Direction");
-                break;
-        }
+        Direction currentDirection = getDirectionFacing();
+        setDirectionFacing(Direction.turnLeft(currentDirection));
     }
 
     public void turnRight()
@@ -131,24 +116,8 @@ public class Bike implements GridObject {
         if (!hasBeenPlaced())
             return;
 
-        switch (getDirectionFacing()) {
-            case NORTH:
-                setDirectionFacing(Direction.EAST);
-                break;
-            case WEST:
-                setDirectionFacing(Direction.NORTH);
-                break;
-            case SOUTH:
-                setDirectionFacing(Direction.WEST);
-                break;
-            case EAST:
-                setDirectionFacing(Direction.SOUTH);
-                break;
-            default:
-                LOGGER.severe("Invalid Direction");
-                break;
-        }
-
+        Direction currentDirection = getDirectionFacing();
+        setDirectionFacing(Direction.turnRight(currentDirection));
     }
 
 
