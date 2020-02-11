@@ -1,4 +1,4 @@
-package tests;
+package bike.simulation.tests;
 
 import bike.simulation.Bike;
 import bike.simulation.Direction;

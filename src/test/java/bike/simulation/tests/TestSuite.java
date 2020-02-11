@@ -1,4 +1,4 @@
-package tests;
+package bike.simulation.tests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
