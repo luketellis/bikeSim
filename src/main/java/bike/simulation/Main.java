@@ -108,11 +108,7 @@ public class Main {
 
     private static boolean isSecondHalfOfPlaceStringValid(String[] secondHalfOfLineArray) {
         return (secondHalfOfLineArray.length == 3) && Direction.asDirection(secondHalfOfLineArray[2]) != null &&
-                (isStringAlsoNumber(secondHalfOfLineArray[0])) && (isStringAlsoNumber(secondHalfOfLineArray[1]));
-    }
-
-    private static boolean isStringAlsoNumber(String potentialNumber) {
-        return potentialNumber.matches("-?(0|[1-9]\\d*)");
+                (Utils.isStringAlsoNumber(secondHalfOfLineArray[0])) && (Utils.isStringAlsoNumber(secondHalfOfLineArray[1]));
     }
 
 }
