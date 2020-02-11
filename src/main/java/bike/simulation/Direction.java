@@ -41,4 +41,12 @@ public enum Direction {
                 return null;
         }
     }
+
+    public static Direction asDirection(String str) {
+        for (Direction i : Direction.values()) {
+            if (i.name().equalsIgnoreCase(str))
+                return i;
+        }
+        return null;
+    }
 }

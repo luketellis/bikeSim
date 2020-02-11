@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 public class Main {
     private static BufferedReader br;
     private static Bike bike;
+    private static final String INVALID_INSTRUCTION_MESSAGE = "Invalid Instruction - Skipping";
 
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
@@ -40,9 +41,9 @@ public class Main {
 
     private static void readInput() {
         String currentLine = "";
+        LOGGER.info("Ready to Receive Input: ");
 
         while (true) {
-            LOGGER.info("Ready to Receive Input: ");
             try {
                 if (!((currentLine = br.readLine()) != null && !currentLine.equals("/q"))) break;
             } catch (IOException e) {
@@ -56,7 +57,6 @@ public class Main {
     }
 
     private static void determineInstruction(String instruction) {
-        //1. PLACE <X>,<Y>,<Facing-direction>
         try {
             Command command = Command.valueOf(instruction);
 
@@ -83,22 +83,36 @@ public class Main {
 
     private static void checkForPlaceKeyword(String line) {
         try {
-            String[] splitInTwo;
-            splitInTwo = line.split(" ");
+            String[] splitLineInTwo = line.split(" ");
+            String firstWordInLine = splitLineInTwo[0];
+            String secondWordInLine = splitLineInTwo[1];
 
-            String[] splitInThree = splitInTwo[1].split(",");
-
-            if (splitInTwo[0].equals("PLACE") && splitInThree.length == 3
-                    && splitInThree[2].matches("NORTH|SOUTH|EAST|WEST")) {
-                Point startingPoint = new Point(Integer.parseInt(splitInThree[0]), Integer.parseInt(splitInThree[1]));
-                bike.placeInGrid(startingPoint, Direction.valueOf(splitInThree[2]));
-            } else {
-                LOGGER.warning("Invalid Instruction - Skipping");
+            if (Command.PLACE.equals(Direction.asDirection(firstWordInLine))) {
+                LOGGER.warning(INVALID_INSTRUCTION_MESSAGE);
+                return;
             }
 
-        }catch(IndexOutOfBoundsException e)
-        {
-            LOGGER.warning("Invalid Instruction - Skipping");
+            String[] secondHalfOfLineArray = secondWordInLine.split(",");
+
+            if (isSecondHalfOfPlaceStringValid(secondHalfOfLineArray)) {
+                Point potentialPosition = new Point(Integer.parseInt(secondHalfOfLineArray[0]), Integer.parseInt(secondHalfOfLineArray[1]));
+                bike.placeInGrid(potentialPosition, Direction.valueOf(secondHalfOfLineArray[2]));
+            } else {
+                LOGGER.warning(INVALID_INSTRUCTION_MESSAGE);
+            }
+
+        } catch (IndexOutOfBoundsException e) {
+            LOGGER.warning(INVALID_INSTRUCTION_MESSAGE);
         }
     }
+
+    private static boolean isSecondHalfOfPlaceStringValid(String[] secondHalfOfLineArray) {
+        return (secondHalfOfLineArray.length == 3) && Direction.asDirection(secondHalfOfLineArray[2]) != null &&
+                (isStringAlsoNumber(secondHalfOfLineArray[0])) && (isStringAlsoNumber(secondHalfOfLineArray[1]));
+    }
+
+    private static boolean isStringAlsoNumber(String potentialNumber) {
+        return potentialNumber.matches("-?(0|[1-9]\\d*)");
+    }
+
 }
