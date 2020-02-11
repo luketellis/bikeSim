@@ -63,7 +63,6 @@ public class Bike implements GridObject {
         }
     }
 
-
     public void moveForwardOneSpace()
     {
         if (!hasBeenPlaced())
@@ -72,20 +71,20 @@ public class Bike implements GridObject {
         Point newPoint = new Point(getPosition());
 
         switch (getDirectionFacing()) {
-            case EAST :
-                newPoint.moveUnit(1,0);
+            case NORTH :
+                newPoint.moveNorth();
                 moveBikeIfValid(newPoint);
                 break;
-            case WEST :
-                newPoint.moveUnit(-1,0);
+            case EAST :
+                newPoint.moveEast();
                 moveBikeIfValid(newPoint);
                 break;
             case SOUTH :
-                newPoint.moveUnit(0,-1);
+                newPoint.moveSouth();
                 moveBikeIfValid(newPoint);
                 break;
-            case NORTH :
-                newPoint.moveUnit(0,1);
+            case WEST :
+                newPoint.moveWest();
                 moveBikeIfValid(newPoint);
                 break;
             default:

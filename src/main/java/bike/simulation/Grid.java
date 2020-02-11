@@ -6,20 +6,12 @@ public class Grid {
 
     protected static boolean isOutsideOfXBoundary(int x)
     {
-        if (x < 0 ||x > MAXIMUM_X)
-        {
-            return true;
-        }
-        return false;
+        return x < 0 || x > MAXIMUM_X;
     }
 
     protected static boolean isOutsideOfYBoundary(int y)
     {
-        if (y < 0 ||y > MAXIMUM_Y)
-        {
-            return true;
-        }
-        return false;
+        return y < 0 || y > MAXIMUM_Y;
     }
 
     protected static boolean isOutsideOfBoundary(Point point)
@@ -29,14 +21,12 @@ public class Grid {
 
     protected static void drawGrid()
     {
-        int j;
-        for (int i = 6; i > -1; i--)
+        for (int i = MAXIMUM_Y; i > -1; i--)
         {
-            for (j = 6; j > -1; j--)
+            for (int j = MAXIMUM_X; j > -1; j--)
             {
                 System.out.print("_");
             }
-            j = 6;
             System.out.println();
         }
     }

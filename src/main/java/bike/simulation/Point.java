@@ -39,24 +39,23 @@ public class Point {
         this.y = y;
     }
 
-    public void moveUnit(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-
-    public void moveWest() {
-        this.x--;
-    }
-
     public void moveNorth() {
         this.y++;
+    }
+
+    public void moveEast() {
+        this.x++;
     }
 
     public void moveSouth() {
         this.y--;
     }
 
-    public Boolean isValidPoint()
+    public void moveWest() {
+        this.x--;
+    }
+
+    public boolean isValidPoint()
     {
         if (Grid.isOutsideOfBoundary(new Point(this.x, this.y)))
             return false;
