@@ -15,7 +15,7 @@ public class ForwardTests {
     public void moveForwardOneSpace_bikeNotPlaced_bikeShouldNotBePlaced()  {
         bike = new Bike();
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(bike.getPosition(), bike.getDirectionFacing());
     }
 
@@ -23,7 +23,7 @@ public class ForwardTests {
     public void moveForwardOneSpace_validNorthFacingDirection_yAxisShouldIncreaseByOne() {
         bike = new Bike(new Point(3,3), NORTH);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(3,4), NORTH);
     }
 
@@ -31,7 +31,7 @@ public class ForwardTests {
     public void moveForwardOneSpace_validSouthFacingDirection_yAxisShouldDecreaseByOne()  {
         bike = new Bike(new Point(3,3), SOUTH);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(3,2), SOUTH);
     }
 
@@ -39,7 +39,7 @@ public class ForwardTests {
     public void moveForwardOneSpace_validEastFacingDirection_xAxisShouldIncreaseByOne()  {
         bike = new Bike(new Point(3,3), EAST);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(4,3), EAST);
     }
 
@@ -47,7 +47,7 @@ public class ForwardTests {
     public void moveForwardOneSpace_validEastFacingDirection_xAxisShouldDecreaseByOne()  {
         bike = new Bike(new Point(3,3), WEST);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(2,3), WEST);
     }
 

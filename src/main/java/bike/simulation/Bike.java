@@ -33,16 +33,9 @@ public class Bike implements GridObject {
         this.position = position;
     }
 
-    private Boolean isPositionSet()
+    private boolean isPositionSet()
     {
         return position != null;
-    }
-
-    private String getGPS()
-    {
-        return "(" + position.getX() + "," +
-                " " + position.getY() + ")," +
-                " " + directionFacing;
     }
 
     private boolean hasBeenPlaced() {
@@ -57,13 +50,13 @@ public class Bike implements GridObject {
     public void reportGPS()
     {
         if (isPositionSet()) {
-            LOGGER.info(getGPS());
+            LOGGER.info(this.toString());
         } else {
             LOGGER.severe("The Bike must be placed before Reporting GPS");
         }
     }
 
-    public void moveForwardOneSpace()
+    public void moveForward()
     {
         if (!hasBeenPlaced())
             return;
@@ -131,4 +124,10 @@ public class Bike implements GridObject {
         setDirectionFacing(newDirection);
     }
 
+    @Override
+    public String toString() {
+        return "(" + position.getX() +
+                "," + position.getY()
+                + "), " + directionFacing;
+    }
 }

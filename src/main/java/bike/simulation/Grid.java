@@ -4,17 +4,22 @@ public class Grid {
     private static final int MAXIMUM_X = 6;
     private static final int MAXIMUM_Y = 6;
 
-    protected static boolean isOutsideOfXBoundary(int x)
+    //Suppress default constructor for non-instantiability
+    private Grid() {
+        throw new AssertionError();
+    }
+
+    static boolean isOutsideOfXBoundary(int x)
     {
         return x < 0 || x > MAXIMUM_X;
     }
 
-    protected static boolean isOutsideOfYBoundary(int y)
+    static boolean isOutsideOfYBoundary(int y)
     {
         return y < 0 || y > MAXIMUM_Y;
     }
 
-    protected static boolean isOutsideOfBoundary(Point point)
+    static boolean isOutsideOfBoundary(Point point)
     {
         return isOutsideOfXBoundary(point.getX()) || isOutsideOfYBoundary(point.getY());
     }
@@ -30,5 +35,4 @@ public class Grid {
             System.out.println();
         }
     }
-
 }

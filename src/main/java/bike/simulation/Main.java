@@ -62,7 +62,7 @@ public class Main {
 
             switch (command) {
                 case FORWARD:
-                    bike.moveForwardOneSpace();
+                    bike.moveForward();
                     break;
                 case TURN_LEFT:
                     bike.turnLeft();

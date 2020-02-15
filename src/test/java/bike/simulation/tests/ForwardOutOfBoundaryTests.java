@@ -23,10 +23,10 @@ public class ForwardOutOfBoundaryTests {
     public void moveForwardOneSpace_onExceedingMaximumNorthPosition_shouldNotChange()  {
         bike.placeInGrid(new Point(6,5), NORTH);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(6,6), NORTH);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(6,6), NORTH);
     }
 
@@ -34,10 +34,10 @@ public class ForwardOutOfBoundaryTests {
     public void moveForwardOneSpace_onExceedingMaximumSouthPosition_shouldNotChange()  {
         bike.placeInGrid(new Point(6,1), SOUTH);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(6,0), SOUTH);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(6,0), SOUTH);
     }
 
@@ -45,10 +45,10 @@ public class ForwardOutOfBoundaryTests {
     public void moveForwardOneSpace_onExceedingMaximumEastPosition_shouldNotChange()  {
         bike.placeInGrid(new Point(5,1), EAST);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(6,1), EAST);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(6,1), EAST);
     }
 
@@ -56,10 +56,10 @@ public class ForwardOutOfBoundaryTests {
     public void moveForwardOneSpace_onExceedingMaximumWestPosition_shouldNotChange()  {
         bike.placeInGrid(new Point(1,1), WEST);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(0,1), WEST);
 
-        bike.moveForwardOneSpace();
+        bike.moveForward();
         checkBikePositionAndDirection(new Point(0,1), WEST);
     }
 

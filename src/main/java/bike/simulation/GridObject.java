@@ -3,7 +3,7 @@ package bike.simulation;
 public interface GridObject {
     void reportGPS();
 
-    void moveForwardOneSpace();
+    void moveForward();
 
     void turnLeft();
 
