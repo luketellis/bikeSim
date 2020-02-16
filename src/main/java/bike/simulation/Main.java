@@ -15,9 +15,9 @@ public class Main {
             checkArguments(args);
             bike = new Bike();
             readInput();
-        } catch (FileNotFoundException e) {
-           LOGGER.severe("File Not Found, Exiting");
-           System.exit(0);
+        } catch (IOException e) {
+            LOGGER.severe(String.valueOf(e));
+            System.exit(0);
         }
     }
 
@@ -57,27 +57,37 @@ public class Main {
     }
 
     private static void determineInstruction(String instruction) {
-        try {
-            Command command = Command.valueOf(instruction);
+        Command command = Command.asCommand(instruction);
 
-            switch (command) {
-                case FORWARD:
-                    bike.moveForward();
-                    break;
-                case TURN_LEFT:
-                    bike.turnLeft();
-                    break;
-                case TURN_RIGHT:
-                    bike.turnRight();
-                    break;
-                case GPS_REPORT:
-                    bike.reportGPS();
-                    break;
-                default:
-                    break;
-            }
-        } catch (IllegalArgumentException e) {
+        if (command == null) {
             checkForPlaceKeyword(instruction);
+            return;
+        }
+
+        try {
+            checkAndExecuteCommand(command);
+        } catch (BikeNotPlacedException e) {
+            LOGGER.severe(String.valueOf(e));
+        }
+    }
+
+    private static void checkAndExecuteCommand(Command command) {
+        switch (command) {
+            case FORWARD:
+                bike.moveForward();
+                break;
+            case TURN_LEFT:
+                bike.turnLeft();
+                break;
+            case TURN_RIGHT:
+                bike.turnRight();
+                break;
+            case GPS_REPORT:
+                bike.reportGPS();
+                break;
+            default:
+                LOGGER.severe("Unsupported Command Detected");
+                break;
         }
     }
 
@@ -87,7 +97,7 @@ public class Main {
             String firstWordInLine = splitLineInTwo[0];
             String secondWordInLine = splitLineInTwo[1];
 
-            if (Command.PLACE.equals(Direction.asDirection(firstWordInLine))) {
+            if (!Command.PLACE.equals(Command.asCommand(firstWordInLine))) {
                 LOGGER.warning(INVALID_INSTRUCTION_MESSAGE);
                 return;
             }

@@ -20,7 +20,7 @@ public class ForwardOutOfBoundaryTests {
 
 
     @Test
-    public void moveForwardOneSpace_onExceedingMaximumNorthPosition_shouldNotChange()  {
+    public void moveForwardOneSpace_onExceedingMaximumNorthPosition_shouldNotChange() {
         bike.placeInGrid(new Point(6,5), NORTH);
 
         bike.moveForward();
@@ -31,7 +31,7 @@ public class ForwardOutOfBoundaryTests {
     }
 
     @Test
-    public void moveForwardOneSpace_onExceedingMaximumSouthPosition_shouldNotChange()  {
+    public void moveForwardOneSpace_onExceedingMaximumSouthPosition_shouldNotChange() {
         bike.placeInGrid(new Point(6,1), SOUTH);
 
         bike.moveForward();
@@ -42,7 +42,7 @@ public class ForwardOutOfBoundaryTests {
     }
 
     @Test
-    public void moveForwardOneSpace_onExceedingMaximumEastPosition_shouldNotChange()  {
+    public void moveForwardOneSpace_onExceedingMaximumEastPosition_shouldNotChange() {
         bike.placeInGrid(new Point(5,1), EAST);
 
         bike.moveForward();
@@ -53,7 +53,7 @@ public class ForwardOutOfBoundaryTests {
     }
 
     @Test
-    public void moveForwardOneSpace_onExceedingMaximumWestPosition_shouldNotChange()  {
+    public void moveForwardOneSpace_onExceedingMaximumWestPosition_shouldNotChange() {
         bike.placeInGrid(new Point(1,1), WEST);
 
         bike.moveForward();

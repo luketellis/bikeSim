@@ -33,33 +33,20 @@ public class Bike implements GridObject {
         this.position = position;
     }
 
-    private boolean isPositionSet()
-    {
-        return position != null;
-    }
-
-    private boolean hasBeenPlaced() {
-        if (!isPositionSet()) {
-            LOGGER.severe("The Bike must be placed before Movement");
-            return false;
-        }
-
-        return true;
-    }
-
-    public void reportGPS()
-    {
-        if (isPositionSet()) {
-            LOGGER.info(this.toString());
-        } else {
-            LOGGER.severe("The Bike must be placed before Reporting GPS");
+    private void verifyBikeHasBeenPlaced() {
+        if (position == null) {
+            throw new BikeNotPlacedException();
         }
     }
 
-    public void moveForward()
-    {
-        if (!hasBeenPlaced())
-            return;
+    public void reportGPS() {
+        verifyBikeHasBeenPlaced();
+
+        LOGGER.info(this.toString());
+    }
+
+    public void moveForward() {
+        verifyBikeHasBeenPlaced();
 
         Point newPoint = new Point(getPosition());
 
@@ -94,24 +81,19 @@ public class Bike implements GridObject {
         }
     }
 
-    public void turnLeft()
-    {
-        if (!hasBeenPlaced())
-            return;
+    public void turnLeft() {
+        verifyBikeHasBeenPlaced();
 
         Direction currentDirection = getDirectionFacing();
         setDirectionFacing(Direction.turnLeft(currentDirection));
     }
 
-    public void turnRight()
-    {
-        if (!hasBeenPlaced())
-            return;
+    public void turnRight() {
+        verifyBikeHasBeenPlaced();
 
         Direction currentDirection = getDirectionFacing();
         setDirectionFacing(Direction.turnRight(currentDirection));
     }
-
 
     public void placeInGrid(Point newPosition, Direction newDirection)
     {

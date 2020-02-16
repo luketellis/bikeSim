@@ -1,6 +1,7 @@
 package bike.simulation.tests;
 
 import bike.simulation.Bike;
+import bike.simulation.BikeNotPlacedException;
 import bike.simulation.Direction;
 import bike.simulation.Point;
 import org.junit.Assert;
@@ -11,8 +12,8 @@ import static bike.simulation.Direction.*;
 public class ForwardTests {
     private Bike bike;
 
-    @Test
-    public void moveForwardOneSpace_bikeNotPlaced_bikeShouldNotBePlaced()  {
+    @Test(expected = BikeNotPlacedException.class)
+    public void moveForwardOneSpace_bikeNotPlaced_bikeShouldNotBePlaced() {
         bike = new Bike();
 
         bike.moveForward();
@@ -28,7 +29,7 @@ public class ForwardTests {
     }
 
     @Test
-    public void moveForwardOneSpace_validSouthFacingDirection_yAxisShouldDecreaseByOne()  {
+    public void moveForwardOneSpace_validSouthFacingDirection_yAxisShouldDecreaseByOne() {
         bike = new Bike(new Point(3,3), SOUTH);
 
         bike.moveForward();
@@ -36,7 +37,7 @@ public class ForwardTests {
     }
 
     @Test
-    public void moveForwardOneSpace_validEastFacingDirection_xAxisShouldIncreaseByOne()  {
+    public void moveForwardOneSpace_validEastFacingDirection_xAxisShouldIncreaseByOne() {
         bike = new Bike(new Point(3,3), EAST);
 
         bike.moveForward();
@@ -44,7 +45,7 @@ public class ForwardTests {
     }
 
     @Test
-    public void moveForwardOneSpace_validEastFacingDirection_xAxisShouldDecreaseByOne()  {
+    public void moveForwardOneSpace_validEastFacingDirection_xAxisShouldDecreaseByOne() {
         bike = new Bike(new Point(3,3), WEST);
 
         bike.moveForward();

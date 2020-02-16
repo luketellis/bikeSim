@@ -1,6 +1,7 @@
 package bike.simulation.tests;
 
 import bike.simulation.Bike;
+import bike.simulation.BikeNotPlacedException;
 import bike.simulation.Direction;
 import bike.simulation.Point;
 import org.junit.*;
@@ -10,8 +11,8 @@ import static bike.simulation.Direction.*;
 public class TurnLeftTests {
     private Bike bike;
 
-    @Test
-    public void turnLeft_bikeNotPlaced_bikeShouldNotHavePositionOrDirection()  {
+    @Test(expected = BikeNotPlacedException.class)
+    public void turnLeft_bikeNotPlaced_bikeShouldNotHavePositionOrDirection() {
         bike = new Bike();
 
         bike.turnLeft();
@@ -19,7 +20,7 @@ public class TurnLeftTests {
     }
 
     @Test
-    public void turnLeft_bikeHasNorthPosition_bikeShouldFaceWest()  {
+    public void turnLeft_bikeHasNorthPosition_bikeShouldFaceWest() {
         bike = new Bike(new Point(0,0), NORTH);
 
         bike.turnLeft();
@@ -27,7 +28,7 @@ public class TurnLeftTests {
     }
 
     @Test
-    public void turnLeft_bikeHasSouthPosition_bikeShouldFaceEast()  {
+    public void turnLeft_bikeHasSouthPosition_bikeShouldFaceEast() {
         bike = new Bike(new Point(0,0), SOUTH);
 
         bike.turnLeft();
@@ -35,7 +36,7 @@ public class TurnLeftTests {
     }
 
     @Test
-    public void turnLeft_bikeHaEastPosition_bikeShouldFaceNorth()  {
+    public void turnLeft_bikeHaEastPosition_bikeShouldFaceNorth() {
         bike = new Bike(new Point(0,0), EAST);
 
         bike.turnLeft();
@@ -43,7 +44,7 @@ public class TurnLeftTests {
     }
 
     @Test
-    public void turnLeft_bikeHasWestPosition_bikeShouldFaceSouth()  {
+    public void turnLeft_bikeHasWestPosition_bikeShouldFaceSouth() {
         bike = new Bike(new Point(0,0), WEST);
 
         bike.turnLeft();
